@@ -1,14 +1,19 @@
 from student import Student
 from subject import Subject
-from categories import Category, Student_Division, Subject_Type, default_student_divisions, default_subject_types
+from categories import Category, Student_Division, Subject_Type
+
+default_student_divisions = {}
+default_subject_types = {}
 
 
 def create_default_categories():
     for defined_category in Category.__members__:
+
         passing_marks_for_division = input(
             f"Enter passing marks for {defined_category}")
+
         no_of_subjects_passing_marks = input(
-            f"Enter no of subjects in which the passing marks need to be scored for {defined_category}")
+            f"In how many subjects for {defined_category} category, should student have a total score more than {passing_marks_for_division} ? ")
 
         default_subject_types[defined_category] = Subject_Type(
             type=defined_category)

@@ -5,14 +5,13 @@ from itertools import combinations
 class Evaluate:
     total_passing_marks = 50
 
-    def evaluate_by_total_score(subjects, cutoff):
+    def evaluate_by_total_score(subjects_list, total_passing_marks):
 
         total_marks = 0
-        Evaluate.total_passing_marks = cutoff
+        Evaluate.total_passing_marks = total_passing_marks
 
-        for subject in subjects:
-            if subject != None:
-                total_marks += int(subject['marks'])
+        for subject in subjects_list:
+            total_marks += int(subject['marks'])
 
         print(
             f"Passing mark:  {Evaluate.total_passing_marks}, Total Marks obtained:  {total_marks}")
@@ -24,28 +23,28 @@ class Evaluate:
 
             return False
 
-    def evaluate_by_student_division(student_division, subjects):
+    def evaluate_by_student_division(student_division, subjects_list):
         division_passing_marks = int(
-            student_division.student_division_passing_marks)
+            student_division.division_passing_marks)
 
         marks_list = []
         no_of_subjects_above_cutoff_to_pass = int(
             student_division.no_of_subjects_above_cutoff_to_pass)
-        for subject in subjects:
+        for subject in subjects_list:
 
-            if (student_division.student_division == subject['type'].subject_type):
+            if (student_division.division_name == subject['type'].subject_type):
                 marks_list.append(int(subject['marks']))
 
-        return Evaluate.check_subjects_greater_than_cutoff(marks_list=marks_list,
-                                                           no_of_subjects=no_of_subjects_above_cutoff_to_pass,
-                                                           cutoff=division_passing_marks)
+        return Evaluate.are_marks_above_passing_marks(marks_list=marks_list,
+                                                      no_of_subjects=no_of_subjects_above_cutoff_to_pass,
+                                                      passing_marks=division_passing_marks)
 
-    def check_subjects_greater_than_cutoff(marks_list, no_of_subjects, cutoff):
+    def are_marks_above_passing_marks(marks_list, no_of_subjects, passing_marks):
         for comb in combinations(marks_list, no_of_subjects):
-            if (sum(comb) > cutoff):
+            if (sum(comb) > passing_marks):
                 print(
-                    f"A combination of {no_of_subjects} subjects from {marks_list}, which are {comb} , have crossed {cutoff} ")
+                    f"A combination of {no_of_subjects} subjects from {marks_list}, which are {comb} , have crossed {passing_marks} ")
                 return True
         print(
-            f"Any {no_of_subjects} subjects from {marks_list} have not crossed {cutoff}")
+            f"Any {no_of_subjects} subjects from {marks_list} have not crossed {passing_marks}")
         return False

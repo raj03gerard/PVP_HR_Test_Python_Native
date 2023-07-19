@@ -1,7 +1,7 @@
 from student import Student
 from subject import Subject
-from categories import Category, Student_Division, Subject_Type, default_student_divisions, default_subject_types
-from default_data_creation import create_default_categories, create_default_subjects
+from categories import Category, Student_Division, Subject_Type
+from default_data_creation import create_default_categories, create_default_subjects, default_student_divisions, default_subject_types
 from evaluate_result import Evaluate
 
 
@@ -24,7 +24,7 @@ def test():
     i = 0
     while (i < int(no_of_students)):
         student_type = input(
-            "Enter student type: s for science, or h for humanities, f for fine_arts  : ")
+            "Enter student type: s for science, or h for humanities  : ")
         parsed_student_division = default_student_divisions[Category.HUMANITIES.name]
         if student_type == 's':
             parsed_student_division = default_student_divisions[Category.SCIENCE.name]
@@ -46,14 +46,14 @@ def test():
     for student in students_list:
         print(
             f"---------------- Student {student.get_student_name()} results------------------------")
-        print(f"Subjects: {student.get_all_subjects_as_str()}")
-        if (Evaluate.evaluate_by_total_score(subjects=student.subjects, cutoff=total_passing_marks)
-           and Evaluate.evaluate_by_student_division(student_division=student.get_student_division(), subjects=student.get_all_subjects())):
+        print(f"Subjects: {student.get_student_subjects_as_str()}")
+        if (Evaluate.evaluate_by_total_score(subjects_list=student.get_student_subjects(), total_passing_marks=total_passing_marks)
+           and Evaluate.evaluate_by_student_division(student_division=student.get_student_division(), subjects_list=student.get_student_subjects())):
             print(
-                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().student_division} student, has Passed")
+                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().division_name} student, has Passed")
         else:
             print(
-                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().student_division} student, has Failed")
+                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().division_name} student, has Failed")
 
         print("===================================\n")
 
