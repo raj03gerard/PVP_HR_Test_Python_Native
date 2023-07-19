@@ -1,7 +1,7 @@
 from student import Student
 from subject import Subject
-from type import Type, Student_Type, Subject_Type, default_student_types, default_subject_types
-from default_data_creation import create_default_subjects, create_default_types
+from categories import Category, Student_Division, Subject_Type, default_student_divisions, default_subject_types
+from default_data_creation import create_default_categories, create_default_subjects
 from evaluate_result import Evaluate
 
 
@@ -17,7 +17,7 @@ def test():
 
     total_passing_marks = int(input("Enter total passing marks"))
 
-    create_default_types()
+    create_default_categories()
     default_subjects = create_default_subjects()
 
     students_list = []
@@ -25,16 +25,16 @@ def test():
     while (i < int(no_of_students)):
         student_type = input(
             "Enter student type: s for science, or h for humanities, f for fine_arts  : ")
-        parsed_student_type = default_student_types[Type.HUMANITIES.name]
+        parsed_student_division = default_student_divisions[Category.HUMANITIES.name]
         if student_type == 's':
-            parsed_student_type = default_student_types[Type.SCIENCE.name]
+            parsed_student_division = default_student_divisions[Category.SCIENCE.name]
         elif student_type == 'h':
-            parsed_student_type = default_student_types[Type.HUMANITIES.name]
+            parsed_student_division = default_student_divisions[Category.HUMANITIES.name]
 
         else:
             break
 
-        new_student_obj = Student(name=i, type=parsed_student_type)
+        new_student_obj = Student(name=i, division=parsed_student_division)
         for sub in default_subjects:
             sub_marks = input(f"Enter marks for  {sub.title}")
             new_student_obj.add_subject_marks(subject=sub, marks=sub_marks)
@@ -45,15 +45,15 @@ def test():
     print("")
     for student in students_list:
         print(
-            f"---------------- Student {student.name} results------------------------")
-        print(f"Subjects: {student.get_subjects_str()}")
+            f"---------------- Student {student.get_student_name()} results------------------------")
+        print(f"Subjects: {student.get_all_subjects_as_str()}")
         if (Evaluate.evaluate_by_total_score(subjects=student.subjects, cutoff=total_passing_marks)
-           and Evaluate.evaluate_by_student_division(student_division=student.type, subjects=student.subjects)):
+           and Evaluate.evaluate_by_student_division(student_division=student.get_student_division(), subjects=student.get_all_subjects())):
             print(
-                f"RESULT: Student  {student.name} who is a {student.type.student_type} student, has Passed")
+                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().student_division} student, has Passed")
         else:
             print(
-                f"RESULT: Student  {student.name} who is a {student.type.student_type} student, has Failed")
+                f"RESULT: Student  {student.get_student_name()} who is a {student.get_student_division().student_division} student, has Failed")
 
         print("===================================\n")
 

@@ -1,4 +1,4 @@
-from type import Type
+from categories import Category
 from itertools import combinations
 
 
@@ -25,20 +25,20 @@ class Evaluate:
             return False
 
     def evaluate_by_student_division(student_division, subjects):
-        student_type_passing_marks = int(
-            student_division.student_type_passing_marks)
+        division_passing_marks = int(
+            student_division.student_division_passing_marks)
 
         marks_list = []
         no_of_subjects_above_cutoff_to_pass = int(
             student_division.no_of_subjects_above_cutoff_to_pass)
         for subject in subjects:
 
-            if (student_division.student_type == subject['type'].subject_type):
+            if (student_division.student_division == subject['type'].subject_type):
                 marks_list.append(int(subject['marks']))
 
         return Evaluate.check_subjects_greater_than_cutoff(marks_list=marks_list,
                                                            no_of_subjects=no_of_subjects_above_cutoff_to_pass,
-                                                           cutoff=student_type_passing_marks)
+                                                           cutoff=division_passing_marks)
 
     def check_subjects_greater_than_cutoff(marks_list, no_of_subjects, cutoff):
         for comb in combinations(marks_list, no_of_subjects):
