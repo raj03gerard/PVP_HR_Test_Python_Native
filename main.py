@@ -12,7 +12,7 @@ def main():
 def test():
     no_of_students = input("Enter no of students")
     if (no_of_students.isdigit() == False):
-        print("Please enter only valid integers")
+        print("Please enter valid integers")
         return
 
     total_passing_marks = int(input("Enter total passing marks"))
@@ -30,8 +30,7 @@ def test():
             parsed_student_type = default_student_types[Type.SCIENCE.name]
         elif student_type == 'h':
             parsed_student_type = default_student_types[Type.HUMANITIES.name]
-        elif student_type == 'f':
-            parsed_student_type = default_student_types[Type.FINE_ARTS.name]
+
         else:
             break
 
@@ -49,7 +48,7 @@ def test():
             f"---------------- Student {student.name} results------------------------")
         print(f"Subjects: {student.get_subjects_str()}")
         if (Evaluate.evaluate_by_total_score(subjects=student.subjects, cutoff=total_passing_marks)
-           and Evaluate.evaluate_by_student_type(student_type=student.type, subjects=student.subjects)):
+           and Evaluate.evaluate_by_student_division(student_division=student.type, subjects=student.subjects)):
             print(
                 f"RESULT: Student  {student.name} who is a {student.type.student_type} student, has Passed")
         else:

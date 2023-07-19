@@ -8,7 +8,6 @@ default_subject_types = {}
 class Type(Enum):
     SCIENCE = 1
     HUMANITIES = 2
-    FINE_ARTS = 3
 
 
 class Student_Type:

@@ -31,9 +31,6 @@ def create_default_subjects():
                 type=default_subject_types[Type.HUMANITIES.name]),
         Subject(title=' English',
                 type=default_subject_types[Type.HUMANITIES.name]),
-        Subject(title='Painting',
-                type=default_subject_types[Type.FINE_ARTS.name]),
-        Subject(title='Anatomy',
-                type=default_subject_types[Type.FINE_ARTS.name]),
+
     ]
     return default_subjects

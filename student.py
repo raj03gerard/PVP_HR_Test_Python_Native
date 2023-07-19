@@ -15,9 +15,6 @@ class Student:
     def get_all_subjects(self):
         return self.subjects
 
-    def print_student(self):
-        print(self.name, " ", self.type.student_type, " ", self.subjects)
-
     def get_subjects_str(self):
 
         subjects_as_str = "["
