@@ -2,9 +2,15 @@ from student import Student
 from categories import Category
 from default_data_creation import create_default_categories, create_default_subjects, default_student_divisions, default_subject_types
 from evaluate_result import Evaluate_Student_Result
+import tkinter as tk
+from gui_handler import GUI_Handler
 
 
 def main():
+
+    gui_handler = GUI_Handler()
+    gui_handler.input_no_of_students()
+
     no_of_students = input("Enter no of students")
     if (no_of_students.isdigit() == False):
         print("Please enter a valid integer")
